@@ -1,4 +1,6 @@
 ﻿using ElevenNote.Models;
+using ElevenNote.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,11 @@ namespace MVC_ElevenNote.Controllers
         // GET: Note/Index
         public ActionResult Index()
         {
-            var model = new NoteListItem[0];
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new NoteService(userId);
+            var model = service.GetNotes();
+            //var model = new NoteListItem[0];
+
             return View(model);
         }
         //GET: Note/Create
@@ -28,9 +34,14 @@ namespace MVC_ElevenNote.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                return View(model);
             }
-            return View(model);
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new NoteService(userId);
+
+            service.CreateNote(model);
+
+            return RedirectToAction("Index");
         }
     }
 }
