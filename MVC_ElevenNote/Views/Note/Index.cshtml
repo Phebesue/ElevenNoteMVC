@@ -5,10 +5,19 @@
 }
 
 <h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@if (TempData.ContainsKey("SaveResult"))
+{
+<div class="alert alert-sucess fade in" role="alert">
+    
+    <button type="button" class="close" data-dismiss="=" alert">
+        <span>&times;;</span>
+    </button>
+    @TempData["SaveResult"]
+</div>
+}
 <table class="table">
     <tr>
         <th>
