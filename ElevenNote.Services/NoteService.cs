@@ -15,6 +15,8 @@ namespace ElevenNote.Services
         {
             _userId = userId;
         }
+        //___________________Create____________
+
         public bool CreateNote(NoteCreate model)
         {
             var entity =
@@ -32,6 +34,8 @@ namespace ElevenNote.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        //___________________Get-Read____________
+
         public IEnumerable<NoteListItem> GetNotes()
         {
             using (var ctx = new ApplicationDbContext())
@@ -51,6 +55,8 @@ namespace ElevenNote.Services
                 return query.ToArray();
             }
         }
+        //___________________Get-By Id____________
+
         public NoteDetail GetNoteById(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -70,6 +76,8 @@ namespace ElevenNote.Services
                 };
             }
         }
+        //___________________Edit-Update____________
+
         public bool UpdateNote(NoteEdit model)
         {
             using (var ctx = new ApplicationDbContext())
@@ -87,6 +95,8 @@ namespace ElevenNote.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        //___________________Delete____________
+
         public bool DeleteNote(int noteId)
         {
             using (var ctx = new ApplicationDbContext())
